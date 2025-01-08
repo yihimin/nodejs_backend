@@ -1,15 +1,21 @@
-const express = require('express');
+"use strict";
+
+const express = require("express");
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello, Express.js');
-});
+const PORT = 3000;
 
-app.get('/login', (req, res) => {
-    res.send('Hello, Login');
-});
+// 라우터 가져오기
+const home = require("./routes/home");
 
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+// 앱 설정
+app.set("views", "./views");
+app.set("view engine", "ejs");
 
+// 라우터 등록
+app.use("/", home);
+
+// 서버 실행
+app.listen(PORT, () => {
+    console.log("Server On!");
 });
