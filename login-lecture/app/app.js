@@ -2,6 +2,7 @@
 
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 
 // 라우터 가져오기
 const home = require("./src/routes/home");
@@ -10,6 +11,7 @@ const home = require("./src/routes/home");
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 app.use(express.static(`${__dirname}/src/public`));
+app.use(bodyParser.json({ extended: true }));
 
 // 라우터 등록
 app.use("/", home);
