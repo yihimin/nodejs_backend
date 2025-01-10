@@ -9,6 +9,7 @@ router.get("/", ctrl.output.hello);
 
 // 로그인 화면 라우트
 router.get("/login", ctrl.output.login);
+router.get("/register", ctrl.output.register);
 router.post("/login", ctrl.process.login);
 
 // 라우터 내보내기
