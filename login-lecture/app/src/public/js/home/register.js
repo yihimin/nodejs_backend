@@ -4,7 +4,7 @@ const id = document.querySelector("#id"),
       name = document.querySelector("#name"),
       pw = document.querySelector("#pw"),
       confirmPw = document.querySelector("#confirm-pw"),
-      registerBtn = document.querySelector("button");
+      registerBtn = document.querySelector("#button");
 
 registerBtn.addEventListener("click", register);
 
