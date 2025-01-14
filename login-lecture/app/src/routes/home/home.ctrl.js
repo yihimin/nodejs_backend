@@ -2,7 +2,7 @@
 
 const User = require("../../models/User"); // User 클래스를 가져옴
 
-const output = {
+const output = { // output 객체 생성
     hello : (req, res) => {
         res.render("home/index");
     },
