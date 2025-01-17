@@ -1,6 +1,6 @@
 "use strict";
 
-const fs = require("fs").promises;
+const db = require("../config/db");
 
 class UserStorage {
 
@@ -16,21 +16,19 @@ class UserStorage {
     }
 
     static getUsers(...fields) {
-        return fs
-            .readFile("./src/databases/users.json")
-            .then((data) => {
-                return this.#getUsers(data, fields);
-            })
-            .catch(console.error);
     }
 
-    static getUserInfo(id) {
-        return fs
-            .readFile("./src/databases/users.json")
-            .then((data) => {
-                return this.#getUserInfo(data, id);
-            })
-            .catch(console.error);
+    static async getUserInfo(id) {
+        try {
+            const [rows] = await db.query("SELECT * FROM users WHERE id = ?", [id]);
+            if (!Array.isArray(rows) || rows.length === 0) {
+                throw new Error("존재하지 않는 아이디입니다.");
+            }
+            return rows[0];
+        } catch (err) {
+            console.error("Database error:", err.message, err.stack);
+            throw new Error("사용자 정보를 가져오는 중 오류 발생");
+        }
     }
 
     static #getUserInfo(data, id) {
@@ -45,26 +43,6 @@ class UserStorage {
     }
 
     static async save(userInfo) {
-        try {
-            const data = await fs.readFile("./src/databases/users.json", "utf-8");
-            const users = JSON.parse(data);
-
-            if (users.id.includes(userInfo.id)) {
-                throw "이미 존재하는 아이디입니다.";
-            }
-
-            // 기존 데이터에 새 유저 정보 추가
-            users.id.push(userInfo.id);
-            users.name.push(userInfo.name);
-            users.pw.push(userInfo.pw);
-
-            // 파일에 저장
-            await fs.writeFile("./src/databases/users.json", JSON.stringify(users, null, 2), "utf-8");
-            return { success: true };
-        } catch (error) {
-            console.error("Error saving user:", error);
-            throw error;
-        }
     }
 }
 
