@@ -6,7 +6,7 @@ const ctrl = require("./home.ctrl");
 
 // 홈 화면 라우트
 router.get("/", ctrl.output.hello);
-
+//g
 // 로그인 화면 라우트
 router.get("/login", ctrl.output.login);
 router.get("/register", ctrl.output.register);
