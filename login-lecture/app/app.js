@@ -12,6 +12,8 @@ dotenv.config();
 
 // 라우팅
 const home = require("./src/routes/home");
+const logger = require("./src/config/logger");
+logger.info("앱 실행");
 
 // 앱 설정
 app.set("views", "./src/views");

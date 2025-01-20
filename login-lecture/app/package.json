@@ -91,7 +91,8 @@
     "type-is": "^1.6.18",
     "unpipe": "^1.0.0",
     "utils-merge": "^1.0.1",
-    "vary": "^1.1.2"
+    "vary": "^1.1.2",
+    "winston": "^3.17.0"
   },
   "scripts": {
     "start": "nodemon ./bin/www.js",
