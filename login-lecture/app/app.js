@@ -3,8 +3,9 @@
 //모듈
 const express = require("express");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
 const morgan = require("morgan");
+const logger = require("./src/config/logger");
+const dotenv = require("dotenv");
 const accessLogStream = require("./src/config/log");
 
 const app = express();
@@ -21,8 +22,7 @@ app.set("view engine", "ejs");
 app.use(express.static(`${__dirname}/src/public`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan("dev"));
-app.use(morgan("common", { stream: accessLogStream }));
+app.use(morgan("tiny", { stream: logger.stream }));
 
 // 라우터 등록
 app.use("/", home);
